@@ -1,16 +1,71 @@
-.mainTab{
-		height: 100%;
-		color:green;
-		.test3{
-			border:1px solid red;
+@maxWidth:414px;/*iphone6plus屏幕大小*/
+@minWidth:320px;/*最小尺寸*/
+@w100:100%;/*宽百分比100*/
+@h100:100%;/*高百分比100*/
+@mainTabh:48px;/*底部栏高度*/
+@tabIconFz:20px;/*底部栏icon的font-size*/
+@tabTextFz:12px;/*底部栏text的font-size*/
+@mainColor:#4169E1;/*主题颜色*/
+.wrapper{
+	width:100%;
+	height:100vh;
+	overflow: hidden;
+	.content{
+		max-width:@maxWidth;
+		min-width:@minWidth;
+		margin:0 auto;
+		width:@w100;
+		height:@h100;
+		overflow:scroll;
+		background: aqua;
+		.contentPage{
+			padding-bottom: @mainTabh;
 		}
 	}
-.content{
-	color:red;
-	.mainTab
 }
-:global(.ant-input){}
-/*:global(.mainTab){
-	height: 100%;
-	color:green;
-}*/
+.mainTab{
+	position:fixed;
+	bottom:0px;
+	width:@w100;
+	max-width:@maxWidth;
+	min-width:0;
+	height:@mainTabh;
+	background-color: #E6E6FA;
+	box-sizing: border-box;
+	.tabUl{
+		display: flex;
+		height: @h100;
+		.tabLi{
+			min-width: 0;
+			flex:1;
+			display:flex;
+			justify-content:center;
+			align-items: center;
+			i{
+				font-size: @tabIconFz;
+				display: block;
+			}
+			.tabLiText{
+				font-size: @tabTextFz;
+			}
+		}
+	}
+}
+:global(a:link){
+	text-decoration: none;
+}
+:global(a:visted){
+	text-decoration: none;
+}
+:global(a:hover){
+	text-decoration: none;
+}
+:global(a:active){
+	text-decoration: none;
+}
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar  
+{  
+    width: 0px;  
+    height: 0px;  
+}  

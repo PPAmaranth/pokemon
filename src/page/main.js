@@ -1,34 +1,48 @@
+import { Component } from 'react';
 import "antd/dist/antd.css";
-import { Layout,Tabs } from 'antd';
+import { Layout } from 'antd';
+import { MainTab } from '../component/mainTab.js'
 import mainLess from '../style/main.less'
 const {
   Header, Footer, Sider, Content,
 } = Layout;
 
-class MainTab extends React.Component {
-  state = {
-    tabPosition: 'bottom',
+export default class MainPage extends Component{
+  constructor() {
+    super();
+    this.state = {
+      activePageId:1
+    };
   }
-  render(){
-  	const TabPane = Tabs.TabPane;
-  	return(
-  		<Tabs tabPosition={this.state.tabPosition} className={mainLess.mainTab}>
-          <TabPane className={mainLess.test3} tab="Tab 1" key="1">Content of Tab 1</TabPane>
-          <TabPane tab="Tab 2" key="2">Content of Tab 2</TabPane>
-          <TabPane tab="Tab 3" key="3">Content of Tab 3</TabPane>
-        </Tabs>
-  	);
+  componentWillMount(){
+    //修改title
+    document.title = "宝可梦"
+    //根据url判断激活tab
+    let routerMap = {
+      "/":1,
+      "/illustratedHandbook":1,
+      "/discovery":2
+    }
+    if(this.props.location.pathname){
+      this.setState({
+        activePageId:routerMap[this.props.location.pathname]
+      })
+    }
   }
-}
-
-
-export default () => {
-  console.log(mainLess)
-  return (
-	  	<Layout style={{height:"100vh","width":"100vw"}}>
+  render() {
+    const activeId = this.state.activePageId
+    return (
+	  	<Layout className={mainLess.wrapper}>
     		<Content className={mainLess.content}>
-    			<MainTab id="test3"></MainTab>
+          <div className={mainLess.contentPage}>
+              {this.props.children}
+          </div>
+    			<MainTab
+            activeId={activeId}
+          >
+          </MainTab>
     		</Content>
 	    </Layout>
   	);
+  }
 }

@@ -21,5 +21,19 @@ export default {
   routes: [{
     path: '/',
     component: './main',
+    routes: [
+    	{
+	        path: '/',
+	        component: './modPage/illustratedHandbook.js'
+	    },
+    	{
+	       	path: '/illustratedHandbook',
+	        component: './modPage/illustratedHandbook.js'
+	    },
+	    {
+	       	path: '/discovery',
+	        component: './modPage/discovery.js'
+	    },
+    ]
   }],
 }
