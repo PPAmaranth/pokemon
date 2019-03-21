@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import "antd/dist/antd.css";
 import { Layout } from 'antd';
-import { MainTab } from '../component/mainTab.js'
-import mainLess from '../style/main.less'
+import { MainTab } from '@/component/mainTab.js'
+import mainLess from '@/style/main.less'
 const {
   Header, Footer, Sider, Content,
 } = Layout;

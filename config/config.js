@@ -24,11 +24,11 @@ export default {
     routes: [
     	{
 	        path: '/',
-	        component: './modPage/illustratedHandbook.js'
+	        component: './modPage/illustratedHandbook/index.js'
 	    },
     	{
 	       	path: '/illustratedHandbook',
-	        component: './modPage/illustratedHandbook.js'
+	        component: './modPage/illustratedHandbook/index.js'
 	    },
 	    {
 	       	path: '/discovery',

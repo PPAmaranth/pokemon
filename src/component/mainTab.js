@@ -1,5 +1,5 @@
 import { Icon } from 'antd';
-import mainLess from '../style/main.less'
+import mainLess from '@/style/main.less'
 import Link from 'umi/link';
 //main主页面底部tab
 export class MainTab extends React.Component {
