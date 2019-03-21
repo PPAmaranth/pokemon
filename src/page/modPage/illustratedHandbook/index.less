@@ -40,13 +40,13 @@
 		}
 		>div:last-child{
 			border-right:none;
-			flex-direction: row;
+			flex-direction: column;
 			display: flex;
 			justify-content: space-around;
 			>div{
-				width: 50px;
+				/*width: 50px;*/
 				display: flex;
-				flex-direction: column;
+				flex-direction: row;
 				justify-content:space-around;
 				align-items: center;
 				div{
@@ -56,8 +56,13 @@
 					align-items: center;
 				}
 				>div{
-					width: 100%;
+					width: 40px;
 					height: 100%;
+				}
+			}
+			>div:last-child{
+				>div{
+					width:100%;
 				}
 			}
 		}
@@ -68,9 +73,12 @@
 			display: flex;
 			justify-content:center;
 			align-items: center;
+			span{
+				color:#fff;
+			}
 		}
 	}
 	.listItem:first-child{
-		border-top: 5px solid #E6E6FA;
+		border-top: 4px solid #E6E6FA;
 	}
 }

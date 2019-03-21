@@ -1,3 +1,4 @@
+import {resolve} from "path";
 export default {
   singular: true,
   plugins: [
@@ -36,4 +37,7 @@ export default {
 	    },
     ]
   }],
+  alias: {
+    '@': resolve(__dirname, './src'),
+  },
 }
