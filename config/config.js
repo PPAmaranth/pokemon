@@ -25,11 +25,11 @@ export default {
     routes: [
     	{
 	        path: '/',
-	        component: './modPage/illustratedHandbook/index.js'
+	        component: './modPage/illustratedHandbook/index.js',
 	    },
     	{
 	       	path: '/illustratedHandbook',
-	        component: './modPage/illustratedHandbook/index.js'
+	        component: './modPage/illustratedHandbook/index.js',
 	    },
 	    {
 	       	path: '/discovery',
@@ -39,5 +39,8 @@ export default {
   }],
   alias: {
     '@': resolve(__dirname, './src'),
+  },
+  targets: {
+    ie: 11,
   },
 }

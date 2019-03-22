@@ -1,6 +1,8 @@
 export default {
   namespace: 'illustratedHandbook',
   state:{
+    activePage:"list",
+    currentItem:{},
     listItems:[
         {
           number:"001",
