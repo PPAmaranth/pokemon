@@ -4,7 +4,6 @@ import Link from 'umi/link';
 
 export class TopTab extends React.Component {
 	render(){
-		console.log(this.props)
 		let top;
 		if(this.props.state.activePage == 'list'){
 			top = (
@@ -16,8 +15,8 @@ export class TopTab extends React.Component {
 		if(this.props.state.activePage == 'detail'){
 			top = (
 				<div className={pageLess.topTab}>
-					<div className={pageLess.returnBtn}>
-						<Icon type="left" theme="twoTone" twoToneColor="#fff"/>
+					<div className={pageLess.returnBtn} onClick={()=>this.props.DetailClick()}>
+						<Icon type="left"/>
 					</div>
 					<div>{this.props.state.currentItem.CNname}</div>
 				</div>

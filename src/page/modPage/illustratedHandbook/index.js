@@ -22,6 +22,9 @@ export default class Index extends Component{
 	handleListClick(item){
 		this.setState({activePage:"detail",currentItem:item})
 	}
+	handleDetailClick(){
+		this.setState({activePage:"list"})
+	}
 	render(){
 		let page;
 		if(this.state.activePage == "list"){
@@ -39,7 +42,10 @@ export default class Index extends Component{
 		}
 		return (
 		  	<div className={pageLess.indexWrapper}>
-		  		<TopTab state={this.state}></TopTab>
+		  		<TopTab 
+		  			state={this.state}
+		  			DetailClick = {()=>this.handleDetailClick()}>
+		  		</TopTab>
 		  		{page}
 		  	</div>
 		)
