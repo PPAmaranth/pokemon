@@ -14,11 +14,24 @@ const mapStateToProps = (state) => {
   };
 };
 
-@connect(mapStateToProps)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDidMount: () => {
+      dispatch({
+        type: `${namespace}/queryInitCards`,
+      });
+    },
+  };
+};
+
+@connect(mapStateToProps,mapDispatchToProps)
 export default class Index extends Component{
 	componentWillMount(){
 		this.setState(this.props[namespace])
 	}
+	componentDidMount() {
+	    this.props.onDidMount();
+	  }
 	handleListClick(item){
 		this.setState({activePage:"detail",currentItem:item})
 	}

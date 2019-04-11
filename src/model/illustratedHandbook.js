@@ -1,3 +1,5 @@
+import request from '../util/request';
+
 export default {
   namespace: 'illustratedHandbook',
   state:{
@@ -35,5 +37,29 @@ export default {
           imgUrl:"002Ivysaur"
         }
       ]
+  },
+  effects: {
+    *queryInitCards(_, sagaEffects) {
+      const { call, put } = sagaEffects;
+      const endPointURI = 'http://localhost:8010/book/getBookById';
+      const method = 'POST';
+      const data = {id:1}
+      const puzzle = yield call(request, endPointURI, method , data);
+      yield put({ type: 'addNewCard', payload: puzzle });
+    }
+  },
+  reducers: {
+    addNewCard(state, { payload: newCard }) {
+      return {
+        book:newCard
+      }
+      const nextCounter = state.counter + 1;
+      const newCardWithId = { ...newCard, id: nextCounter };
+      const nextData = state.data.concat(newCardWithId);
+      return {
+        data: nextData,
+        counter: nextCounter,
+      };
+    }
   }
 };
