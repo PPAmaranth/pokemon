@@ -21,34 +21,38 @@ const mapDispatchToProps = (dispatch) => {
         type: `${namespace}/queryInitCards`,
       });
     },
+    handleListClick: (item) => {
+    	const action = {
+	        type: `${namespace}/handleListClick`,
+	        payload: item,
+      };
+      dispatch(action);
+    },
+    handleDetailClick: () => {
+    	const action = {
+	        type: `${namespace}/handleDetailClick`,
+      };
+      dispatch(action);
+    },
   };
 };
 
-@connect(mapStateToProps,mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Index extends Component{
-	componentWillMount(){
-		this.setState(this.props[namespace])
-	}
 	componentDidMount() {
-	    this.props.onDidMount();
+	    this.props.onDidMount()
 	  }
-	handleListClick(item){
-		this.setState({activePage:"detail",currentItem:item})
-	}
-	handleDetailClick(){
-		this.setState({activePage:"list"})
-	}
 	render(){
 		let page;
-		if(this.state.activePage == "list"){
+		if(this.props.illustratedHandbook.activePage == "list"){
 			page = (
 				<List 
-					listItems={this.state.listItems}
-					listClick = {(item)=>this.handleListClick(item)}
+					listItems={this.props.illustratedHandbook.listItems}
+					listClick = {(item)=>this.props.handleListClick(item)}
 				></List>
 			)
 		}
-		if(this.state.activePage == "detail"){
+		if(this.props.illustratedHandbook.activePage == "detail"){
 			page = (
 				<Detail></Detail>
 			)
@@ -56,8 +60,8 @@ export default class Index extends Component{
 		return (
 		  	<div className={pageLess.indexWrapper}>
 		  		<TopTab 
-		  			state={this.state}
-		  			DetailClick = {()=>this.handleDetailClick()}>
+		  			state={this.props.illustratedHandbook}
+		  			DetailClick = {()=>this.props.handleDetailClick()}>
 		  		</TopTab>
 		  		{page}
 		  	</div>

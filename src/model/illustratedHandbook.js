@@ -5,6 +5,7 @@ export default {
   state:{
     activePage:"list",
     currentItem:{},
+    book:{},
     listItems:[
         {
           number:"001",
@@ -50,16 +51,26 @@ export default {
   },
   reducers: {
     addNewCard(state, { payload: newCard }) {
-      return {
-        book:newCard
+      const newState = {
+        ...state,
+        book:newCard.result
       }
-      const nextCounter = state.counter + 1;
-      const newCardWithId = { ...newCard, id: nextCounter };
-      const nextData = state.data.concat(newCardWithId);
-      return {
-        data: nextData,
-        counter: nextCounter,
-      };
+      return newState
+    },
+    handleListClick(state, { payload: item }){
+      const newState = {
+        ...state,
+        currentItem:item,
+        activePage:"detail"
+      }
+      return newState
+    },
+    handleDetailClick(state){
+      const newState = {
+        ...state,
+        activePage:"list"
+      }
+      return newState
     }
   }
 };
