@@ -5,55 +5,57 @@ export default {
   state:{
     activePage:"list",
     currentItem:{},
-    book:{},
     listItems:[
         {
-          number:"001",
+          id:1,
+          illustrationBookId:1,
           properties:[4,14],
+          propertyOne:4,
+          propertyTwo:14,
           CNname:"妙蛙种子",
-          speciesStrength:{
-            HP:45,
-            Attack:49,
-            Defense:49,
-            SpecialAttack:65,
-            SpecialDefense:65,
-            Speed:45,
-            Total:318
-          },
-          imgUrl:"001Bulbasaur"
+          attack: 49,
+          defense: 49,
+          ethnicValue: 318,
+          hp: 45,
+          sAttack: 65,
+          sDefense: 65,
+          speed: 45,
+          // imgUrl:"001Bulbasaur"
         },
-        {
-          number:"002",
-          properties:[4,14],
-          CNname:"妙蛙草",
-          speciesStrength:{
-            HP:60,
-            Attack:62,
-            Defense:63,
-            SpecialAttack:80,
-            SpecialDefense:80,
-            Speed:60,
-            Total:405
-          },
-          imgUrl:"002Ivysaur"
-        }
+        // {
+        //   number:"002",
+        //   properties:[4,14],
+        //   CNname:"妙蛙草",
+        //   propertyOne:4,
+        //   propertyTwo:14,
+        //   speciesStrength:{
+        //     HP:60,
+        //     Attack:62,
+        //     Defense:63,
+        //     SpecialAttack:80,
+        //     SpecialDefense:80,
+        //     Speed:60,
+        //     Total:405
+        //   },
+        //   imgUrl:"002Ivysaur"
+        // }
       ]
   },
   effects: {
     *queryInitCards(_, sagaEffects) {
       const { call, put } = sagaEffects;
-      const endPointURI = 'http://localhost:8010/book/getBookById';
+      const endPointURI = 'http://localhost:8010/pokemon/queryAll';
       const method = 'POST';
       const data = {id:1}
       const puzzle = yield call(request, endPointURI, method , data);
-      yield put({ type: 'addNewCard', payload: puzzle });
+      yield put({ type: 'updateList', payload: puzzle });
     }
   },
   reducers: {
-    addNewCard(state, { payload: newCard }) {
+    updateList(state, { payload: newList }) {
       const newState = {
         ...state,
-        book:newCard.result
+        listItems:newList.result.list
       }
       return newState
     },

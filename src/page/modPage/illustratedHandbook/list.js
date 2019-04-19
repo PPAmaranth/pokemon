@@ -2,6 +2,7 @@ import { Component } from 'react';
 import pageLess from './index.less';
 import {pm_propeties} from '@/public_js/properties.js'
 const requireContext = require.context("@/image/illustratedHandbook",true, /^\.\/.*\.png$/);
+const notfoundPng = require("@/image/system/notfound.png");
 const projectImgs = requireContext.keys().map(requireContext);
 
 export class List extends Component{
@@ -62,8 +63,14 @@ export class List extends Component{
 		}
 	}
 	renderListItem(item){
-		const _imgUrl = this.getImgUrl(item.imgUrl);
-		const _properties = this.getProperties(item.properties);
+		let _imgUrl;
+		if(item.imgUrl){
+			_imgUrl	= this.getImgUrl(item.imgUrl);
+		}else{
+			_imgUrl	= notfoundPng;
+		}
+		const _illustrationBookId = (Array(3).join(0) + item.illustrationBookId).slice(-3);
+		const _properties = this.getProperties([item.propertyOne,item.propertyTwo]);
 		const propertiesDiv = this.renderPropertiesDiv(_properties)
 		const speciesStrengthBg = {
 			HP:"#98FB98",
@@ -75,9 +82,9 @@ export class List extends Component{
 			Total:"#FFF8DC",
 		}
 		return (
-			<div key={item.number} className={pageLess.listItem} onClick={()=>this.props.listClick(item)}>
+			<div key={item.id} className={pageLess.listItem} onClick={()=>this.props.listClick(item)}>
 				<div>
-					<div className={pageLess.number}><span>{item.number}</span></div>
+					<div className={pageLess.number}><span>{_illustrationBookId}</span></div>
 					<div className={pageLess.image}>
 						<div style={{backgroundImage:`url(${_imgUrl})`}}></div>
 					</div>
@@ -86,16 +93,16 @@ export class List extends Component{
 					{propertiesDiv}
 				<div>
 					<div>
-						<div style={{backgroundColor:speciesStrengthBg.HP}}><div><div>HP</div><div>{item.speciesStrength.HP}</div></div></div>
-						<div style={{backgroundColor:speciesStrengthBg.Attack}}><div><div>攻击</div><div>{item.speciesStrength.Attack}</div></div></div>
-						<div style={{backgroundColor:speciesStrengthBg.Defense}}><div><div>防御</div><div>{item.speciesStrength.Defense}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.HP}}><div><div>HP</div><div>{item.hp}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.Attack}}><div><div>攻击</div><div>{item.attack}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.Defense}}><div><div>防御</div><div>{item.defense}</div></div></div>
 					</div>
 					<div>
-						<div style={{backgroundColor:speciesStrengthBg.Speed}}><div><div>速度</div><div>{item.speciesStrength.Speed}</div></div></div>
-						<div style={{backgroundColor:speciesStrengthBg.SpecialAttack}}><div><div>特攻</div><div>{item.speciesStrength.SpecialAttack}</div></div></div>
-						<div style={{backgroundColor:speciesStrengthBg.SpecialDefense}}><div><div>特防</div><div>{item.speciesStrength.SpecialDefense}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.Speed}}><div><div>速度</div><div>{item.speed}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.SpecialAttack}}><div><div>特攻</div><div>{item.sAttack}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.SpecialDefense}}><div><div>特防</div><div>{item.sDefense}</div></div></div>
 					</div>
-					<div><div style={{backgroundColor:speciesStrengthBg.Total}}><div>总和</div><div>{item.speciesStrength.Total}</div></div></div>
+					<div><div style={{backgroundColor:speciesStrengthBg.Total}}><div>总和</div><div>{item.ethnicValue}</div></div></div>
 				</div>
 			</div>
 		)
