@@ -88,7 +88,7 @@ export class List extends Component{
 					<div className={pageLess.image}>
 						<div style={{backgroundImage:`url(${_imgUrl})`}}></div>
 					</div>
-					<div className={pageLess.name}><span>{item.CNname}</span></div>
+					<div className={pageLess.name}><span>{item.name}</span></div>
 				</div>
 					{propertiesDiv}
 				<div>

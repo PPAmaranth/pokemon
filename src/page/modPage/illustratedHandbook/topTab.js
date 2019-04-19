@@ -18,7 +18,7 @@ export class TopTab extends React.Component {
 					<div className={pageLess.returnBtn} onClick={()=>this.props.DetailClick()}>
 						<Icon type="left"/>
 					</div>
-					<div>{this.props.state.currentItem.CNname}</div>
+					<div>{this.props.state.currentItem.name}</div>
 				</div>
 			)
 		}

@@ -54,7 +54,9 @@ export default class Index extends Component{
 		}
 		if(this.props.illustratedHandbook.activePage == "detail"){
 			page = (
-				<Detail></Detail>
+				<Detail
+					currentItem={this.props.illustratedHandbook.currentItem}
+				></Detail>
 			)
 		}
 		return (

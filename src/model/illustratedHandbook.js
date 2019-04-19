@@ -6,22 +6,21 @@ export default {
     activePage:"list",
     currentItem:{},
     listItems:[
-        {
-          id:1,
-          illustrationBookId:1,
-          properties:[4,14],
-          propertyOne:4,
-          propertyTwo:14,
-          CNname:"妙蛙种子",
-          attack: 49,
-          defense: 49,
-          ethnicValue: 318,
-          hp: 45,
-          sAttack: 65,
-          sDefense: 65,
-          speed: 45,
-          // imgUrl:"001Bulbasaur"
-        },
+        // {
+        //   id:1,
+        //   illustrationBookId:1,
+        //   propertyOne:12,
+        //   propertyTwo:4,
+        //   CNname:"妙蛙种子",
+        //   attack: 49,
+        //   defense: 49,
+        //   ethnicValue: 318,
+        //   hp: 45,
+        //   sAttack: 65,
+        //   sDefense: 65,
+        //   speed: 45,
+        //   // imgUrl:"001Bulbasaur"
+        // },
         // {
         //   number:"002",
         //   properties:[4,14],
@@ -70,7 +69,7 @@ export default {
     handleDetailClick(state){
       const newState = {
         ...state,
-        activePage:"list"
+        activePage:"list",
       }
       return newState
     }

@@ -1,40 +1,46 @@
 // 属性表
 export const pm_propeties = {
+	0:{
+		id:0,
+		CNname:"全部",
+		ENname:"all",
+		color:"#fff"
+	},
 	1:{
 		id:1,
 		CNname:"一般",
-		ENname:"normal",
+		ENname:"general",
 		color:"#D3D3D3"
 	},
 	2:{
 		id:2,
-		CNname:"火",
-		ENname:"fire",
-		color:"#FF3030"
+		CNname:"格斗",
+		ENname:"fighting",
+		color:"#8B4513"
 	},
 	3:{
 		id:3,
-		CNname:"水",
-		ENname:"water",
-		color:"#63B8FF"
+		CNname:"飞行",
+		ENname:"flying",
+		color:"#CAE1FF"
 	},
 	4:{
 		id:4,
-		CNname:"草",
-		ENname:"grass",
-		color:"#00FF7F"
+		CNname:"毒",
+		ENname:"poison",
+		color:"#68228B"
 	},
 	5:{
 		id:5,
-		CNname:"电",
-		ENname:"electric",
-		color:"#FFFF00"
+		CNname:"地面",
+		ENname:"ground",
+		color:"#CD8500"
 	},
 	6:{
 		id:6,
-		CNname:"冰",
-		ENname:"ice",
-		color:"#009ACD"
+		CNname:"岩石",
+		ENname:"rock",
+		color:"#8B7355"
 	},
 	7:{
 		id:7,
@@ -44,63 +50,63 @@ export const pm_propeties = {
 	},
 	8:{
 		id:8,
-		CNname:"飞行",
-		ENname:"flying",
-		color:"#CAE1FF"
-	},
-	9:{
-		id:9,
-		CNname:"地面",
-		ENname:"ground",
-		color:"#CD8500"
-	},
-	10:{
-		id:10,
-		CNname:"岩石",
-		ENname:"rock",
-		color:"#8B7355"
-	},
-	11:{
-		id:11,
-		CNname:"格斗",
-		ENname:"fighting",
-		color:"#8B4513"
-	},
-	12:{
-		id:12,
-		CNname:"超能力",
-		ENname:"psychic",
-		color:"#BA55D3"
-	},
-	13:{
-		id:13,
 		CNname:"幽灵",
 		ENname:"ghost",
 		color:"#9370DB"
 	},
-	14:{
-		id:14,
-		CNname:"毒",
-		ENname:"poison",
-		color:"#68228B"
-	},
-	15:{
-		id:15,
-		CNname:"恶",
-		ENname:"dark",
-		color:"#4F4F4F"
-	},
-	16:{
-		id:16,
+	9:{
+		id:9,
 		CNname:"钢",
 		ENname:"steel",
 		color:"#8B7B8B"
 	},
-	17:{
-		id:17,
+	10:{
+		id:10,
+		CNname:"火",
+		ENname:"fire",
+		color:"#FF3030"
+	},
+	11:{
+		id:11,
+		CNname:"水",
+		ENname:"water",
+		color:"#63B8FF"
+	},
+	12:{
+		id:12,
+		CNname:"草",
+		ENname:"grass",
+		color:"#00FF7F"
+	},
+	13:{
+		id:13,
+		CNname:"电",
+		ENname:"electric",
+		color:"#FFFF00"
+	},
+	14:{
+		id:14,
+		CNname:"超能力",
+		ENname:"psychic",
+		color:"#BA55D3"
+	},
+	15:{
+		id:15,
+		CNname:"冰",
+		ENname:"ice",
+		color:"#009ACD"
+	},
+	16:{
+		id:16,
 		CNname:"龙",
 		ENname:"dragon",
 		color:"#00F5FF"
+	},
+	17:{
+		id:17,
+		CNname:"恶",
+		ENname:"dark",
+		color:"#4F4F4F"
 	},
 	18:{
 		id:18,
