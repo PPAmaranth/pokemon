@@ -2,7 +2,7 @@ import { Component } from 'react';
 import pageLess from './index.less';
 import {pm_propeties} from '@/public_js/properties.js'
 const requireContext = require.context("@/image/illustratedHandbook",true, /^\.\/.*\.png$/);
-const notfoundPng = require("@/image/system/notfound.png");
+const notfoundPng = require("@/image/system/notFound.png");
 const projectImgs = requireContext.keys().map(requireContext);
 
 export class List extends Component{
@@ -112,7 +112,7 @@ export class List extends Component{
 		return (
 		  	<div>
 		  		<div className={pageLess.listWrapper}>
-		        	{this.props.listItems.map((item) => this.renderListItem(item))}
+		        	{this.props.modState.listItems.map((item) => this.renderListItem(item))}
 		      	</div>
 		  	</div>
 		)

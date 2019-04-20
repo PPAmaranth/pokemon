@@ -5,6 +5,7 @@ export default {
   state:{
     activePage:"list",
     currentItem:{},
+    detailCollapeseActive:1,
     listItems:[
         // {
         //   id:1,
@@ -54,7 +55,7 @@ export default {
     updateList(state, { payload: newList }) {
       const newState = {
         ...state,
-        listItems:newList.result.list
+        listItems:state.listItems.concat(newList.result.list)
       }
       return newState
     },
@@ -70,6 +71,13 @@ export default {
       const newState = {
         ...state,
         activePage:"list",
+      }
+      return newState
+    },
+    handleDetailCollapseChange(state, { payload: item }){
+      const newState = {
+        ...state,
+        detailCollapeseActive:item.index
       }
       return newState
     }

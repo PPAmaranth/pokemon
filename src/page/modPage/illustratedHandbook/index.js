@@ -34,6 +34,13 @@ const mapDispatchToProps = (dispatch) => {
       };
       dispatch(action);
     },
+    handleDetailCollapseChange: (item) => {
+    	const action = {
+	        type: `${namespace}/handleDetailCollapseChange`,
+	        payload: item,
+      };
+      dispatch(action);
+    },
   };
 };
 
@@ -47,7 +54,7 @@ export default class Index extends Component{
 		if(this.props.illustratedHandbook.activePage == "list"){
 			page = (
 				<List 
-					listItems={this.props.illustratedHandbook.listItems}
+					modState={this.props.illustratedHandbook}
 					listClick = {(item)=>this.props.handleListClick(item)}
 				></List>
 			)
@@ -55,7 +62,8 @@ export default class Index extends Component{
 		if(this.props.illustratedHandbook.activePage == "detail"){
 			page = (
 				<Detail
-					currentItem={this.props.illustratedHandbook.currentItem}
+					ModState={this.props.illustratedHandbook}
+					handleDetailCollapseChange = {(item)=>this.props.handleDetailCollapseChange(item)}
 				></Detail>
 			)
 		}
