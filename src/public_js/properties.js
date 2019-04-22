@@ -114,4 +114,12 @@ export const pm_propeties = {
 		ENname:"fairy",
 		color:"#FF83FA"
 	},
+	//获取属性
+	getProperties(propertiesId){
+		let arr = []
+		for(const id of propertiesId){
+			arr.push(this[id])
+		}
+		return arr
+	}
 }

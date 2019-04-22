@@ -17,14 +17,6 @@ export class List extends Component{
             }
 		}
 	}
-	//获取属性
-	getProperties(propertiesId){
-		let arr = []
-		for(const id of propertiesId){
-			arr.push(pm_propeties[id])
-		}
-		return arr
-	}
 	renderPropertiesDiv(_properties){
 		if(_properties.length>1){
 			const propertiesDiv = (
@@ -70,7 +62,7 @@ export class List extends Component{
 			_imgUrl	= notfoundPng;
 		}
 		const _illustrationBookId = (Array(3).join(0) + item.illustrationBookId).slice(-3);
-		const _properties = this.getProperties([item.propertyOne,item.propertyTwo]);
+		const _properties = pm_propeties.getProperties([item.propertyOne,item.propertyTwo]);
 		const propertiesDiv = this.renderPropertiesDiv(_properties)
 		const speciesStrengthBg = {
 			HP:"#98FB98",
