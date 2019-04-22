@@ -6,7 +6,7 @@ export class Detail extends Component{
 	renderBasicInformation(){
 		return(
 			<div className={pageLess.basicInformation}>
-				<div>					
+				<div>123					
 				</div>
 			</div>
 		)
@@ -14,10 +14,13 @@ export class Detail extends Component{
 	//风琴折叠页
 	renderCollapseItem(active,item){
 		let _contentHeight
+		let _contentMaxHeight
 		if(active == item.index){
 			_contentHeight = "auto"
+			_contentMaxHeight = "1000px"
 		}else{
 			_contentHeight = "0px"
+			_contentMaxHeight = "0px"
 		}
 		let _content
 		if(item.render){
@@ -28,7 +31,7 @@ export class Detail extends Component{
 				<div className={pageLess.title} onClick={()=>this.props.handleDetailCollapseChange(item)}>
 					<span className={pageLess.titleText}>{item.title}</span>
 				</div>
-				<div style={{height:_contentHeight}} className={pageLess.contentWrapper}>
+				<div style={{height:_contentHeight,maxHeight:_contentMaxHeight}} className={pageLess.contentWrapper}>
 					<div className={pageLess.backgroundTop}>
 					<div className={pageLess.backgroundBottom}>
 						{_content}
