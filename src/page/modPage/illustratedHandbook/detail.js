@@ -1,11 +1,8 @@
 import { Component } from 'react';
 // 引入 ECharts 主模块
 import echarts from 'echarts/lib/echarts';
-// 引入柱状图
-import  'echarts/lib/chart/bar';
-// 引入提示框和标题组件
-import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/title';
+//引入雷达
+import  'echarts/lib/chart/radar';
 import { List } from '@/component/list.js';
 import pageLess from './index.less';
 import {pm_propeties} from '@/public_js/properties.js';
@@ -14,31 +11,47 @@ const notfoundPng = require("@/image/system/notFound.png");
 class AbilityTable extends Component{
 	constructor(props){
         super(props);
-        this.table=React.createRef();
     }
     componentDidMount(){
-    	echart.init(this.table);
-        var option = {
-            title: {
-                text: 'ECharts 入门示例'
-            },
-            tooltip: {},
-            legend: {
-                data:['销量']
-            },
-            xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
-            }]
-        };
+    	let _detailAbilityEchart = echarts.init(document.getElementById("detailAbilityEchart"));
+        console.log(this.props)
+        const option = {
+		    title: {},
+		    tooltip: {},
+		    legend: {},
+		    radar: {
+		        name: {
+		            textStyle: {
+		                color: '#000',
+		           }
+		        },
+		        nameGap: 0,
+				radius: "75%",
+		        indicator: [
+		           { name: 'HP', max: 200},
+		           { name: '攻击', max: 200},
+		           { name: '防御', max: 200},
+		           { name: '特攻', max: 200},
+		           { name: '特防', max: 200},
+		           { name: '速度', max: 200}
+		        ]
+		    },
+		    series: [{
+		        name: '',
+		        type: 'radar',
+		        data : [
+		            {
+		                value : [45, 49, 49, 65, 65, 45],
+		            }
+		        ]
+		    }]
+		};
+        _detailAbilityEchart.setOption(option);
     }
     render(){
-        return <input ref={this.table}/>
+        return (
+        	<div style={{width:"100%",height:"100%"}} id="detailAbilityEchart"></div>
+        )
     }
 }
 
@@ -129,9 +142,7 @@ export class Detail extends Component{
 					<List list={_list}></List>
 				</div>
 				<div className={pageLess.abilityTable}>
-					<div>
-						<AbilityTable></AbilityTable>
-					</div>
+					<AbilityTable state={state}></AbilityTable>
 				</div>
 			</div>
 		)
