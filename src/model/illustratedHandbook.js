@@ -55,7 +55,11 @@ export default {
   },
   reducers: {
     updateList(state, { payload: newList }) {
+      if(newList.result.list.pageNum == state.pageNum){
+        return
+      }
       let _listItems
+      //lgpe获取前151
       if(newList.result.endRow<151){
         _listItems = state.listItems.concat(newList.result.list)
       }else{
@@ -75,11 +79,12 @@ export default {
       }
       return newState
     },
-    handleListClick(state, { payload: item }){
+    handleListClick(state, { item:item }){
       const newState = {
         ...state,
         currentItem:item,
-        activePage:"detail"
+        activePage:"detail",
+        scrollY:window.scrollY
       }
       return newState
     },

@@ -36,15 +36,16 @@ const mapDispatchToProps = (dispatch) => {
 	        payload:_state
 	      });
     },
-    handleListClick: (item) => {
+    handleListClick: (item,scrollY) => {
     	clearEvent()
     	const action = {
 	        type: `${namespace}/handleListClick`,
-	        payload: item,
+	        scrollY: scrollY,
+	        item:item
       };
       dispatch(action);
     },
-    handleDetailClick: () => {
+    handleDetailClick: (state) => {
     	clearEvent()
     	const action = {
 	        type: `${namespace}/handleDetailClick`,
@@ -94,7 +95,7 @@ export default class Index extends Component{
 		  	<div className={pageLess.indexWrapper}>
 		  		<TopTab 
 		  			state={this.props.illustratedHandbook}
-		  			DetailClick = {()=>this.props.handleDetailClick()}>
+		  			DetailClick = {()=>this.props.handleDetailClick(this.props.illustratedHandbook)}>
 		  		</TopTab>
 		  		{page}
 		  	</div>

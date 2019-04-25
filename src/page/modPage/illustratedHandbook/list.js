@@ -112,10 +112,13 @@ export class List extends Component{
 		}
 	}
 	componentDidMount(){
+		//从详情页返回回到点击时的滚动位置
+		if(this.props.modState.scrollY){
+			document.documentElement.scrollTop = this.props.modState.scrollY
+		}
 		//滚动事件
 		let _listWrapper = {
 			getList:this.props.handleGetList,
-			activePage:this.props.modState.activePage,
 			scrollEvent:function(){
 				const _listWrapper = document.querySelector(`.${pageLess.listWrapper}`)
 				const _mainTab = document.querySelector(`.${mainLess.mainTab}`)

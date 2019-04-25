@@ -75,7 +75,7 @@ export const pm_propeties = {
 			"15":2,
 			"16":1,
 			"17":1,
-			"18":2
+			"18":1
 		}
 	},
 	4:{
@@ -316,7 +316,7 @@ export const pm_propeties = {
 		id:13,
 		CNname:"电",
 		ENname:"electric",
-		color:"#FFFF00",
+		color:"#EEC900",
 		countered:{
 			"1":1,
 			"2":1,

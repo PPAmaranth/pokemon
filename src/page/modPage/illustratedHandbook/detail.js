@@ -336,7 +336,7 @@ export class Detail extends Component{
 					</div>
 				</div>
 				<div className={pageLess.collapseWrapper}>
-					{_detailCollapese.items.map((item)=>this.renderCollapseItem(state,item,))}
+					{_detailCollapese.items.map((item)=>this.renderCollapseItem(state,item))}
 				</div>
 			</div>
 		)
