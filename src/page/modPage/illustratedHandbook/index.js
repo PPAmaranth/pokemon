@@ -16,12 +16,28 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onDidMount: () => {
+    onDidMount: (state) => {
       dispatch({
-        type: `${namespace}/queryInitCards`,
+        type: `${namespace}/queryAll`,
+        payload:state
       });
     },
+    handleGetList:(state) =>{
+    	if(state.endRow>151){
+    		return
+    	}
+    	const _pageNum = state.pageNum + 1
+    	const _state = {
+    		...state,
+    		pageNum:_pageNum
+    	}
+    	dispatch({
+	        type: `${namespace}/queryAll`,
+	        payload:_state
+	      });
+    },
     handleListClick: (item) => {
+    	clearEvent()
     	const action = {
 	        type: `${namespace}/handleListClick`,
 	        payload: item,
@@ -29,6 +45,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(action);
     },
     handleDetailClick: () => {
+    	clearEvent()
     	const action = {
 	        type: `${namespace}/handleDetailClick`,
       };
@@ -44,10 +61,15 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
+const clearEvent = () =>{
+	window.onscroll = null
+	window.onresize = null
+}
+
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Index extends Component{
 	componentDidMount() {
-	    this.props.onDidMount()
+	    this.props.onDidMount(this.props.illustratedHandbook)
 	  }
 	render(){
 		let page;
@@ -56,6 +78,7 @@ export default class Index extends Component{
 				<List 
 					modState={this.props.illustratedHandbook}
 					listClick = {(item)=>this.props.handleListClick(item)}
+					handleGetList = {()=>this.props.handleGetList(this.props.illustratedHandbook)}
 				></List>
 			)
 		}

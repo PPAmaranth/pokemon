@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import pageLess from './index.less';
+import mainLess from '@/style/main.less';
 import {pm_propeties} from '@/public_js/properties.js'
 const requireContext = require.context("@/image/illustratedHandbook",true, /^\.\/.*\.png$/);
 const notfoundPng = require("@/image/system/notFound.png");
@@ -18,7 +19,7 @@ export class List extends Component{
 		}
 	}
 	renderPropertiesDiv(_properties){
-		if(_properties.length>1){
+		if(_properties[1]){
 			const propertiesDiv = (
 				<div style={{background:`linear-gradient(${_properties[0].color},${_properties[1].color})`}}>
 					{_properties.map((_properties)=>{
@@ -38,17 +39,13 @@ export class List extends Component{
 		}else{
 			const propertiesDiv = (
 				<div style={{background:_properties[0].color}}>
-					{_properties.map((_properties)=>{
-						return (
-							<div 
-								className={pageLess.propertie} 
-								key={_properties.id} 
-								style={{backgroundColor:`${_properties.color}`}}
-							>
-								<span>{_properties.CNname}</span>
-							</div>
-						)
-					})}
+					<div 
+						className={pageLess.propertie} 
+						key={_properties[0].id} 
+						style={{backgroundColor:`${_properties[0].color}`}}
+					>
+						<span>{_properties[0].CNname}</span>
+					</div>
 				</div>
 			)
 			return propertiesDiv
@@ -61,7 +58,12 @@ export class List extends Component{
 		}else{
 			_imgUrl	= notfoundPng;
 		}
-		const _illustrationBookId = (Array(3).join(0) + item.illustrationBookId).slice(-3);
+		let _illustrationBookId
+		if(item.illustrationBookId){
+			_illustrationBookId = (Array(3).join(0) + item.illustrationBookId).slice(-3);
+		}else{
+			_illustrationBookId = ""
+		}
 		const _properties = pm_propeties.getProperties([item.propertyOne,item.propertyTwo]);
 		const propertiesDiv = this.renderPropertiesDiv(_properties)
 		const speciesStrengthBg = {
@@ -99,7 +101,40 @@ export class List extends Component{
 			</div>
 		)
 	}
-
+	componentWillMount(){
+		window.scrollCallbacks = {}
+		window.onscroll=function(){
+		  for(let i in window.scrollCallbacks){
+		  	if(window.scrollCallbacks[i].scrollEvent){
+		  		window.scrollCallbacks[i].scrollEvent()
+		  	}
+		  }
+		}
+	}
+	componentDidMount(){
+		//滚动事件
+		let _listWrapper = {
+			getList:this.props.handleGetList,
+			activePage:this.props.modState.activePage,
+			scrollEvent:function(){
+				const _listWrapper = document.querySelector(`.${pageLess.listWrapper}`)
+				const _mainTab = document.querySelector(`.${mainLess.mainTab}`)
+				const _topTab = document.querySelector(`.${pageLess.topTab}`)
+				//可视高度 = document可视高度 - 上下高度
+				const _listWrapperHeight = document.documentElement.clientHeight - _mainTab.clientHeight - _topTab.clientHeight
+				if(_listWrapperHeight + window.scrollY > (_listWrapper.clientHeight-100)){
+					//滚动到达几乎触底
+					this.getList()
+				}
+			}
+		}
+		window.scrollCallbacks = {
+			...window.scrollCallbacks,
+			_listWrapper:{
+				..._listWrapper
+			}
+		}
+	}
 	render(){
 		return (
 		  	<div>

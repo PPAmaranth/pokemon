@@ -160,7 +160,12 @@ class AbilityTable extends Component{
 export class Detail extends Component{
 	//基本信息
 	renderBasicInformation(state){
-		const _illustrationBookId = (Array(3).join(0) + state.currentItem.illustrationBookId).slice(-3);
+		let _illustrationBookId 
+		if(state.currentItem.illustrationBookId){
+			_illustrationBookId = (Array(3).join(0) + state.currentItem.illustrationBookId).slice(-3);
+		}else{
+			_illustrationBookId = ""
+		}
 		const _properties = pm_propeties.getProperties([state.currentItem.propertyOne,state.currentItem.propertyTwo]);
 		let _propertiesText = `${_properties["0"].CNname}`
 		if(_properties[1]){
@@ -169,22 +174,22 @@ export class Detail extends Component{
 		const _list = [
 			{
 				key:1,
-				label:"编号",
+				label:"图鉴编号",
 				text:_illustrationBookId
 			},
 			{
 				key:2,
-				label:"中文",
+				label:"中文名称",
 				text:state.currentItem.name
 			},
 			{
 				key:3,
-				label:"英文",
+				label:"英文名称",
 				text:state.currentItem.enName
 			},
 			{
 				key:4,
-				label:"日文",
+				label:"日文名称",
 				text:state.currentItem.jpName
 			},
 			{

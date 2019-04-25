@@ -5,6 +5,8 @@ export default {
   state:{
     activePage:"list",
     currentItem:{},
+    pageNum:0,
+    pageSize:20,
     detailCollapeseActive:1,
     listItems:[
         // {
@@ -42,20 +44,34 @@ export default {
       ]
   },
   effects: {
-    *queryInitCards(_, sagaEffects) {
+    *queryAll(_, sagaEffects) {
       const { call, put } = sagaEffects;
       const endPointURI = 'http://localhost:8010/pokemon/queryAll';
       const method = 'POST';
-      const data = {id:1}
+      const data = {pageNum:_.payload.pageNum,pageSize:_.payload.pageSize}
       const puzzle = yield call(request, endPointURI, method , data);
       yield put({ type: 'updateList', payload: puzzle });
     }
   },
   reducers: {
     updateList(state, { payload: newList }) {
+      let _listItems
+      if(newList.result.endRow<151){
+        _listItems = state.listItems.concat(newList.result.list)
+      }else{
+        let _list = []
+        for(let i in newList.result.list){
+          if(newList.result.list[i].id<=151){
+            _list.push(newList.result.list[i])
+          }
+        }
+        _listItems = state.listItems.concat(_list)
+      }
       const newState = {
         ...state,
-        listItems:state.listItems.concat(newList.result.list)
+        listItems:_listItems,
+        pageNum:state.pageNum+1,
+        endRow:newList.result.endRow
       }
       return newState
     },
