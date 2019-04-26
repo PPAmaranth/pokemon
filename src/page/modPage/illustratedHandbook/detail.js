@@ -5,6 +5,7 @@ import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/legend';
 import 'echarts/lib/chart/radar';
 import 'echarts/lib/chart/pie';
+import 'echarts/lib/chart/tree';
 import { List } from '@/component/list.js';
 import pageLess from './index.less';
 import {pm_propeties} from '@/public_js/properties.js';
@@ -157,6 +158,97 @@ class AbilityTable extends Component{
     }
 }
 
+class EvolutionRelationship extends Component{
+	constructor(props){
+        super(props);
+    }
+    componentDidMount(){
+    	//雷达图
+    	let _evolutionRelationshipEchart = echarts.init(document.getElementById("evolutionRelationshipEchart"));
+        let _normalData = {
+        	name:'妙蛙种子',
+        	children:[
+        		{
+        			name:'妙蛙草',
+        			condition:'Lv16',
+        			beforeName:'妙蛙种子',
+        			children:[
+        				{
+        					name:'妙蛙花',
+        					condition:'Lv32',
+        					beforeName:'妙蛙草'
+        				}
+        			]
+        		}
+        	]
+        }
+        const option = {
+	        tooltip: {
+	            trigger: 'item',
+	            triggerOn: 'mousemove',
+	            formatter: function (params, ticket, callback) {
+				    const _beforeName = params.data.beforeName
+				    const _condition = params.data.condition
+				    const _string = `${_beforeName}${_condition}`
+				    if(_beforeName&&_condition){
+				    	return _string
+				    }else{
+						return
+				    }  
+				}
+	        },
+	        series: [
+	            {
+	                type: 'tree',
+	                data: [_normalData],
+	                top: '1%',
+	                left: '20%',
+	                bottom: '1%',
+	                right: '20%',
+	                symbol:'diamond',//留坑等图
+	                symbolSize: 10,
+	                label: {
+	                    normal: {
+	                        position: 'top',
+	                        verticalAlign: 'middle',
+	                        align: 'middle',
+	                        fontSize: 14,
+	                        padding:[0,0,30,0],
+	                        lineHeight:16,
+						    formatter: function(params) {
+						    	const _beforeName = params.data.beforeName
+							    const _condition = params.data.condition
+							    let _string = `${params.data.name}`
+							    if(_beforeName&&_condition){
+							    	_string = `${_string}\n${_beforeName}${_condition}`
+							    	return _string
+							    }else{
+									return
+							    }
+                            }
+	                    }
+	                },
+	                expandAndCollapse: true,
+	                animationDuration: 550,
+	                animationDurationUpdate: 750
+	            }
+	        ]
+	    }
+        _evolutionRelationshipEchart.setOption(option);
+		window.resizeCallbacks = {
+			...window.resizeCallbacks,
+			_evolutionRelationshipEchart:{
+				..._evolutionRelationshipEchart
+			}
+		}
+    }
+    render(){
+        return (
+        	<div style={{width:"100%",height:"100%"}} id="evolutionRelationshipEchart"></div>
+        )
+    }
+}
+
 export class Detail extends Component{
 	//基本信息
 	renderBasicInformation(state){
@@ -262,6 +354,13 @@ export class Detail extends Component{
 			</div>
 		)
 	}
+	renderEvolutionRelationship(state){
+		return(
+			<div className={pageLess.evolutionRelationship}>
+				<EvolutionRelationship state={state}></EvolutionRelationship>
+			</div>
+		)
+	}
 	//风琴折叠页
 	renderCollapseItem(state,item){
 		let _contentHeight
@@ -313,7 +412,8 @@ export class Detail extends Component{
 	        },
 	        {
 	          title:"进化关系",
-	          index:4
+	          index:4,
+	          render:this.renderEvolutionRelationship
 	        },
 	        {
 	          title:"技能学习（进化）",

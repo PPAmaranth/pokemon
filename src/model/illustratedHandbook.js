@@ -73,7 +73,7 @@ export default {
       }
       const newState = {
         ...state,
-        listItems:_listItems,
+        listItems:[...new Set(_listItems)],
         pageNum:state.pageNum+1,
         endRow:newList.result.endRow
       }

@@ -70,7 +70,9 @@ const clearEvent = () =>{
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Index extends Component{
 	componentDidMount() {
-	    this.props.onDidMount(this.props.illustratedHandbook)
+		if(this.props.illustratedHandbook.listItems.length == 0){
+			this.props.onDidMount(this.props.illustratedHandbook)
+		}
 	  }
 	render(){
 		let page;
