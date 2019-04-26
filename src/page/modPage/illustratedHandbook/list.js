@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { BackTop } from 'antd';
 import pageLess from './index.less';
 import mainLess from '@/style/main.less';
 import {pm_propeties} from '@/public_js/properties.js'
@@ -144,6 +145,7 @@ export class List extends Component{
 		  		<div className={pageLess.listWrapper}>
 		        	{this.props.modState.listItems.map((item) => this.renderListItem(item))}
 		      	</div>
+		      	<BackTop/>
 		  	</div>
 		)
 	}	

@@ -220,7 +220,7 @@ class EvolutionRelationship extends Component{
 							    const _condition = params.data.condition
 							    let _string = `${params.data.name}`
 							    if(_beforeName&&_condition){
-							    	_string = `${_string}\n${_beforeName}${_condition}`
+							    	_string = `${_string}\n${_condition}`
 							    	return _string
 							    }else{
 									return
@@ -243,6 +243,17 @@ class EvolutionRelationship extends Component{
 		}
     }
     render(){
+        return (
+        	<div style={{width:"100%",height:"100%"}} id="evolutionRelationshipEchart"></div>
+        )
+    }
+}
+
+class SkillTable extends Component{
+	constructor(props){
+        super(props);
+    }
+	render(){
         return (
         	<div style={{width:"100%",height:"100%"}} id="evolutionRelationshipEchart"></div>
         )
@@ -354,10 +365,22 @@ export class Detail extends Component{
 			</div>
 		)
 	}
+	//进化关系
 	renderEvolutionRelationship(state){
 		return(
 			<div className={pageLess.evolutionRelationship}>
 				<EvolutionRelationship state={state}></EvolutionRelationship>
+			</div>
+		)
+	}
+	//进化技能
+	renderEvolutionSkill(state){
+		const _skillList = {
+			
+		}
+		return(
+			<div className={pageLess.evolutionSkill}>
+				<SkillTable state={state} skillList={_skillList}></SkillTable>
 			</div>
 		)
 	}
@@ -417,7 +440,8 @@ export class Detail extends Component{
 	        },
 	        {
 	          title:"技能学习（进化）",
-	          index:5
+	          index:5,
+	          render:this.renderEvolutionSkill
 	        },
 	        {
 	          title:"技能学习（技能机）",

@@ -8,6 +8,7 @@ export default {
     pageNum:0,
     pageSize:20,
     detailCollapeseActive:1,
+    loading:true,
     listItems:[
         // {
         //   id:1,

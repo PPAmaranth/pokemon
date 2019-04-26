@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Spin } from 'antd';
 import pageLess from './index.less';
 import { connect } from 'dva';
 import { Detail } from './detail.js'
@@ -94,13 +95,15 @@ export default class Index extends Component{
 			)
 		}
 		return (
-		  	<div className={pageLess.indexWrapper}>
-		  		<TopTab 
-		  			state={this.props.illustratedHandbook}
-		  			DetailClick = {()=>this.props.handleDetailClick(this.props.illustratedHandbook)}>
-		  		</TopTab>
-		  		{page}
-		  	</div>
+			<Spin type="loading" spinning={this.props.illustratedHandbook.loading} delay={500}>
+			  	<div className={pageLess.indexWrapper}>
+			  		<TopTab 
+			  			state={this.props.illustratedHandbook}
+			  			DetailClick = {()=>this.props.handleDetailClick(this.props.illustratedHandbook)}>
+			  		</TopTab>
+			  		{page}
+			  	</div>
+			</Spin>
 		)
 	}	
 }
