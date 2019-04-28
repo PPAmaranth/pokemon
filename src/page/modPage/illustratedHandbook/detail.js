@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Table } from 'antd';
 // 引入 ECharts 主模块
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/component/tooltip';
@@ -205,7 +206,7 @@ class EvolutionRelationship extends Component{
 	                left: '20%',
 	                bottom: '1%',
 	                right: '20%',
-	                symbol:'diamond',//留坑等图
+	                symbol:'diamond',//todo 留坑等图
 	                symbolSize: 10,
 	                label: {
 	                    normal: {
@@ -248,18 +249,6 @@ class EvolutionRelationship extends Component{
         )
     }
 }
-
-class SkillTable extends Component{
-	constructor(props){
-        super(props);
-    }
-	render(){
-        return (
-        	<div style={{width:"100%",height:"100%"}} id="evolutionRelationshipEchart"></div>
-        )
-    }
-}
-
 export class Detail extends Component{
 	//基本信息
 	renderBasicInformation(state){
@@ -375,12 +364,59 @@ export class Detail extends Component{
 	}
 	//进化技能
 	renderEvolutionSkill(state){
-		const _skillList = {
-			
+		const _columns = [
+			{
+				title: '等级',
+				dataIndex: 'level',
+				key: 'level',
+			},
+			{
+				title: '招式',
+				dataIndex: 'cn_name',
+				key: 'cn_name',
+			},
+			{
+				title: '属性',
+				dataIndex: 'property',
+				key: 'property',
+			},
+			{
+				title: '分类',
+				dataIndex: 'classfication',
+				key: 'classfication',
+			},
+			{
+				title: '威力',
+				dataIndex: 'power',
+				key: 'power',
+			},
+			{
+				title: '命中',
+				dataIndex: 'hit_probability',
+				key: 'hit_probability',
+			},
+			{
+				title: 'PP',
+				dataIndex: 'pp',
+				key: 'pp',
+			}	
+		]
+		const _data = [{
+			key: '1',
+			level: '1',
+			cn_name: '撞击',
+			property: 1,
+			classfication: '物理',
+			power: 40,
+			hit_probability:100,
+			pp:40
+		  }];
+		const _pagination = {
+			hideOnSinglePage:true
 		}
 		return(
 			<div className={pageLess.evolutionSkill}>
-				<SkillTable state={state} skillList={_skillList}></SkillTable>
+				<Table columns={_columns} dataSource={_data} pagination={_pagination} />
 			</div>
 		)
 	}

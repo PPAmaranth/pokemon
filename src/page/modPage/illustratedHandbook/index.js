@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Spin } from 'antd';
+import { Spin, Icon } from 'antd';
 import pageLess from './index.less';
 import { connect } from 'dva';
 import { Detail } from './detail.js'
@@ -24,6 +24,9 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
     handleGetList:(state) =>{
+			if(state.loading){
+				return
+			}
     	if(state.endRow>151){
     		return
     	}
@@ -94,8 +97,20 @@ export default class Index extends Component{
 				></Detail>
 			)
 		}
+		const loadingIcon = <Icon type="loading"  style={{ fontSize: 36,color:"#4169E1" }} spin />;
+
 		return (
-			<Spin type="loading" spinning={this.props.illustratedHandbook.loading} delay={500}>
+			<Spin 
+				type="loading" 
+				style={{
+					position:"fixed",
+					top:"50%",
+					transform:"translateY(-50%)"
+				}}
+				indicator={loadingIcon} 
+				spinning={this.props.illustratedHandbook.loading} 
+				delay={500}
+			>
 			  	<div className={pageLess.indexWrapper}>
 			  		<TopTab 
 			  			state={this.props.illustratedHandbook}

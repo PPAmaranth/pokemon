@@ -8,53 +8,23 @@ export default {
     pageNum:0,
     pageSize:20,
     detailCollapeseActive:1,
-    loading:true,
-    listItems:[
-        // {
-        //   id:1,
-        //   illustrationBookId:1,
-        //   propertyOne:12,
-        //   propertyTwo:4,
-        //   CNname:"妙蛙种子",
-        //   attack: 49,
-        //   defense: 49,
-        //   ethnicValue: 318,
-        //   hp: 45,
-        //   sAttack: 65,
-        //   sDefense: 65,
-        //   speed: 45,
-        //   // imgUrl:"001Bulbasaur"
-        // },
-        // {
-        //   number:"002",
-        //   properties:[4,14],
-        //   CNname:"妙蛙草",
-        //   propertyOne:4,
-        //   propertyTwo:14,
-        //   speciesStrength:{
-        //     HP:60,
-        //     Attack:62,
-        //     Defense:63,
-        //     SpecialAttack:80,
-        //     SpecialDefense:80,
-        //     Speed:60,
-        //     Total:405
-        //   },
-        //   imgUrl:"002Ivysaur"
-        // }
-      ]
+    loading:false,
+    listItems:[]
   },
   effects: {
     *queryAll(_, sagaEffects) {
       const { call, put } = sagaEffects;
+      yield put({ type: 'showLoading'});
       const endPointURI = 'http://localhost:8010/pokemon/queryAll';
       const method = 'POST';
       const data = {pageNum:_.payload.pageNum,pageSize:_.payload.pageSize}
-      const puzzle = yield call(request, endPointURI, method , data);
-      yield put({ type: 'updateList', payload: puzzle });
+      const _newlist = yield call(request, endPointURI, method , data);
+      yield put({ type: 'updateList', payload: _newlist });
+      yield put({ type: 'closeLoading'});
     }
   },
   reducers: {
+    //更新list
     updateList(state, { payload: newList }) {
       if(newList.result.list.pageNum == state.pageNum){
         return
@@ -80,6 +50,23 @@ export default {
       }
       return newState
     },
+    //显示加载
+    showLoading(state){
+      const newState = {
+        ...state,
+        loading:true,
+      }
+      return newState
+    },
+    //关闭加载
+    closeLoading(state){
+      const newState = {
+        ...state,
+        loading:false,
+      }
+      return newState
+    },
+    //处理list的点击
     handleListClick(state, { item:item }){
       const newState = {
         ...state,
@@ -89,6 +76,7 @@ export default {
       }
       return newState
     },
+    //处理detail返回点击
     handleDetailClick(state){
       const newState = {
         ...state,
@@ -96,6 +84,7 @@ export default {
       }
       return newState
     },
+    //处理当前折叠页index
     handleDetailCollapseChange(state, { payload: item }){
       const newState = {
         ...state,
