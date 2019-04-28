@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
 // 引入 ECharts 主模块
 import echarts from 'echarts/lib/echarts';
 import 'echarts/lib/component/tooltip';
@@ -379,6 +379,10 @@ export class Detail extends Component{
 				title: '属性',
 				dataIndex: 'property',
 				key: 'property',
+				render: num => {
+					return(
+						<Tag style={{width:"100%",textAlign:"center",backgroundColor:pm_propeties[num]['color']}}>{pm_propeties[num]['CNname']}</Tag>
+				  	)}
 			},
 			{
 				title: '分类',
@@ -409,6 +413,15 @@ export class Detail extends Component{
 			classfication: '物理',
 			power: 40,
 			hit_probability:100,
+			pp:35
+		  },{
+			key: '2',
+			level: '1',
+			cn_name: '叫声',
+			property: 1,
+			classfication: '变化',
+			power: 40,
+			hit_probability:100,
 			pp:40
 		  }];
 		const _pagination = {
@@ -416,7 +429,88 @@ export class Detail extends Component{
 		}
 		return(
 			<div className={pageLess.evolutionSkill}>
-				<Table columns={_columns} dataSource={_data} pagination={_pagination} />
+				<Table 
+					columns={_columns} 
+					dataSource={_data} 
+					pagination={_pagination} 
+					bordered
+				/>
+			</div>
+		)
+	}
+	//技能机技能
+	renderMachineSkill(state){
+		const _columns = [
+			{
+				title: '编号',
+				dataIndex: 'number',
+				key: 'number',
+			},
+			{
+				title: '招式',
+				dataIndex: 'cn_name',
+				key: 'cn_name',
+			},
+			{
+				title: '属性',
+				dataIndex: 'property',
+				key: 'property',
+				render: num => {
+					return(
+						<Tag style={{width:"100%",textAlign:"center",backgroundColor:pm_propeties[num]['color']}}>{pm_propeties[num]['CNname']}</Tag>
+				  	)}
+			},
+			{
+				title: '分类',
+				dataIndex: 'classfication',
+				key: 'classfication',
+			},
+			{
+				title: '威力',
+				dataIndex: 'power',
+				key: 'power',
+			},
+			{
+				title: '命中',
+				dataIndex: 'hit_probability',
+				key: 'hit_probability',
+			},
+			{
+				title: 'PP',
+				dataIndex: 'pp',
+				key: 'pp',
+			}	
+		]
+		const _data = [{
+			key: '1',
+			number: '06',
+			cn_name: '剧毒',
+			property: 4,
+			classfication: '变化',
+			power: "——",
+			hit_probability:90,
+			pp:10
+		  },{
+			key: '2',
+			number: '22',
+			cn_name: '日光束',
+			property: 12,
+			classfication: '特殊',
+			power: 200,
+			hit_probability:100,
+			pp:10
+		  }];
+		const _pagination = {
+			hideOnSinglePage:true
+		}
+		return(
+			<div className={pageLess.machineSkill}>
+				<Table 
+					columns={_columns} 
+					dataSource={_data} 
+					pagination={_pagination}
+					bordered 
+				/>
 			</div>
 		)
 	}
@@ -481,7 +575,8 @@ export class Detail extends Component{
 	        },
 	        {
 	          title:"技能学习（技能机）",
-	          index:6
+			  index:6,
+			  render:this.renderMachineSkill
 	        }
 	      ]
 	    }
