@@ -1,4 +1,4 @@
-import request from '../util/request';
+import request from '@/util/request';
 
 export default {
   namespace: 'illustratedHandbook',
@@ -71,8 +71,7 @@ export default {
       const newState = {
         ...state,
         currentItem:item,
-        activePage:"detail",
-        scrollY:window.scrollY
+        activePage:"detail"
       }
       return newState
     },
@@ -89,6 +88,13 @@ export default {
       const newState = {
         ...state,
         detailCollapeseActive:item.index
+      }
+      return newState
+    },
+    saveScrollY(state){
+      const newState = {
+        ...state,
+        scrollY:window.scrollY
       }
       return newState
     }

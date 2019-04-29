@@ -22,21 +22,7 @@ export default {
   },
   routes: [{
     path: '/',
-    component: './main',
-    routes: [
-    	{
-	        path: '/',
-	        component: './modPage/illustratedHandbook/index.js',
-	    },
-    	{
-	       	path: '/illustratedHandbook',
-	        component: './modPage/illustratedHandbook/index.js',
-	    },
-	    {
-	       	path: '/discovery',
-	        component: './modPage/discovery.js'
-	    },
-    ]
+    component: './main'
   }],
   alias: {
     '@': resolve(__dirname, './src'),

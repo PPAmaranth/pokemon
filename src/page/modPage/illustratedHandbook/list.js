@@ -121,14 +121,16 @@ export class List extends Component{
 		let _listWrapper = {
 			getList:this.props.handleGetList,
 			scrollEvent:function(){
-				const _listWrapper = document.querySelector(`.${pageLess.listWrapper}`)
-				const _mainTab = document.querySelector(`.${mainLess.mainTab}`)
-				const _topTab = document.querySelector(`.${pageLess.topTab}`)
+				const _listWrapper = document.querySelector(`.${pageLess.listWrapper}`) || null
+				const _mainTab = document.querySelector(`.${mainLess.mainTab}`) || null
+				const _topTab = document.querySelector(`.${pageLess.topTab}`) || null
 				//可视高度 = document可视高度 - 上下高度
-				const _listWrapperHeight = document.documentElement.clientHeight - _mainTab.clientHeight - _topTab.clientHeight
-				if(_listWrapperHeight + window.scrollY > (_listWrapper.clientHeight-100)){
-					//滚动到达几乎触底
-					this.getList()
+				if(_listWrapper && _mainTab && _topTab){
+					const _listWrapperHeight = document.documentElement.clientHeight - _mainTab.clientHeight - _topTab.clientHeight
+					if(_listWrapperHeight + window.scrollY > (_listWrapper.clientHeight-100)){
+						//滚动到达几乎触底
+						this.getList()
+					}
 				}
 			}
 		}

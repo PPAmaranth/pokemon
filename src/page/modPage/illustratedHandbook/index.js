@@ -40,14 +40,17 @@ const mapDispatchToProps = (dispatch) => {
 	        payload:_state
 	      });
     },
-    handleListClick: (item,scrollY) => {
+    handleListClick: (item) => {
     	clearEvent()
     	const action = {
 	        type: `${namespace}/handleListClick`,
-	        scrollY: scrollY,
 	        item:item
       };
-      dispatch(action);
+			dispatch(action);
+			const action2 = {
+				type: `${namespace}/saveScrollY`,
+		};
+		dispatch(action2);
     },
     handleDetailClick: (state) => {
     	clearEvent()
@@ -62,7 +65,14 @@ const mapDispatchToProps = (dispatch) => {
 	        payload: item,
       };
       dispatch(action);
-    },
+		},
+		handleModuleChangeBack: (mainProps) => {
+    	const action = {
+	        type: `${namespace}/handleModuleChangeBack`,
+	        mainProps: mainProps,
+      };
+      dispatch(action);
+		}
   };
 };
 
@@ -72,17 +82,20 @@ const clearEvent = () =>{
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class Index extends Component{
+export class IllustratedHandbookIndex extends React.Component{
+	constructor(props) {
+    super(props);
+  }
 	componentDidMount() {
 		if(this.props.illustratedHandbook.listItems.length == 0){
 			this.props.onDidMount(this.props.illustratedHandbook)
 		}
-	  }
+	}
 	render(){
 		let page;
 		if(this.props.illustratedHandbook.activePage == "list"){
 			page = (
-				<List 
+				<List
 					modState={this.props.illustratedHandbook}
 					listClick = {(item)=>this.props.handleListClick(item)}
 					handleGetList = {()=>this.props.handleGetList(this.props.illustratedHandbook)}
@@ -98,7 +111,6 @@ export default class Index extends Component{
 			)
 		}
 		const loadingIcon = <Icon type="loading"  style={{ fontSize: 36,color:"#4169E1" }} spin />;
-
 		return (
 			<Spin 
 				type="loading" 
