@@ -24,12 +24,15 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
     handleGetList:(state) =>{
+			//加载中则不分发请求
 			if(state.loading){
 				return
 			}
+			//lgpe版本截至到超梦151
     	if(state.endRow>151){
     		return
-    	}
+			}
+			//增加页数
     	const _pageNum = state.pageNum + 1
     	const _state = {
     		...state,
@@ -41,45 +44,34 @@ const mapDispatchToProps = (dispatch) => {
 	      });
     },
     handleListClick: (item) => {
-    	clearEvent()
-    	const action = {
-	        type: `${namespace}/handleListClick`,
-	        item:item
-      };
-			dispatch(action);
-			const action2 = {
-				type: `${namespace}/saveScrollY`,
-		};
-		dispatch(action2);
+			dispatch({
+					type: `${namespace}/handleListClick`,
+					item:item
+			});
+			dispatch({
+					type: `${namespace}/saveScrollY`,
+			});
     },
     handleDetailClick: (state) => {
-    	clearEvent()
-    	const action = {
-	        type: `${namespace}/handleDetailClick`,
-      };
-      dispatch(action);
+      dispatch({
+					type: `${namespace}/handleDetailClick`,
+			});
     },
     handleDetailCollapseChange: (item) => {
-    	const action = {
-	        type: `${namespace}/handleDetailCollapseChange`,
-	        payload: item,
-      };
-      dispatch(action);
+      dispatch({
+					type: `${namespace}/handleDetailCollapseChange`,
+					payload: item,
+			});
 		},
 		handleModuleChangeBack: (mainProps) => {
-    	const action = {
-	        type: `${namespace}/handleModuleChangeBack`,
-	        mainProps: mainProps,
-      };
-      dispatch(action);
+      dispatch({
+					type: `${namespace}/handleModuleChangeBack`,
+					mainProps: mainProps,
+			});
 		}
   };
 };
 
-const clearEvent = () =>{
-	window.onscroll = null
-	window.onresize = null
-}
 
 @connect(mapStateToProps, mapDispatchToProps)
 export class IllustratedHandbookIndex extends React.Component{

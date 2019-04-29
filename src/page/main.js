@@ -21,17 +21,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleMainTabChange: (nowActivePageId,activePageId) => {
-    	const action = {
+      dispatch({
           type: `${namespace}/handleMainTabChange`,
-	        activePageId: activePageId,
-      };
-      dispatch(action);
+          activePageId: activePageId,
+      })
       //从1跳出去时 分发illustratedHandbook/saveScrollY 记录scroll
       if(nowActivePageId == 1){
-        const action2 = {
+        dispatch({
           type: 'illustratedHandbook/saveScrollY',
-        };
-        dispatch(action2);
+        });
       }
     },
   };
