@@ -18,6 +18,7 @@ export default {
     listItems:[]
   },
   effects: {
+    //查询list精灵列表
     *queryAll(_, sagaEffects) {
       const { call, put } = sagaEffects;
       yield put({ type: 'showLoading'});
@@ -28,6 +29,7 @@ export default {
       yield put({ type: 'updateList', payload: _newlist });
       yield put({ type: 'closeLoading'});
     },
+    //处理list点击事件 保存scrollY滚动条状态 切换动画
     *handleListClick(_, sagaEffects){
       const { call, put } = sagaEffects;
       yield put({ type: 'saveScrollY'});
@@ -36,12 +38,13 @@ export default {
       yield put({ type: 'main/contentPageAnimationChange', animationName: _.animationIn});
       yield put({ type: 'toDetail', item: _.item });
     },
+    //处理detail返回点击事件
     *handleDetailClick(_, sagaEffects){
       const { call, put } = sagaEffects;
       yield put({ type: 'main/contentPageAnimationChange', animationName: _.animationLeave});
       yield call(delay, 500);
       yield put({ type: 'main/contentPageAnimationChange', animationName: _.animationIn});
-      yield put({ type: 'toList',});
+      yield put({ type: 'toList'});
     }
   },
   reducers: {
