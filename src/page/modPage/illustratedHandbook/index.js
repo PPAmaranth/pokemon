@@ -46,15 +46,16 @@ const mapDispatchToProps = (dispatch) => {
     handleListClick: (item) => {
 			dispatch({
 					type: `${namespace}/handleListClick`,
-					item:item
-			});
-			dispatch({
-					type: `${namespace}/saveScrollY`,
+					item:item,
+					animationLeave:'perspectiveLeft',
+					animationIn:'slideRightReturn',
 			});
     },
     handleDetailClick: (state) => {
       dispatch({
 					type: `${namespace}/handleDetailClick`,
+					animationLeave:'slideRight',
+					animationIn:'perspectiveLeftReturn',
 			});
     },
     handleDetailCollapseChange: (item) => {

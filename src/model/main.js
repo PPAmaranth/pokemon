@@ -1,9 +1,11 @@
 import request from '@/util/request';
+import animationLess from '@/style/animation.less';
 
 export default {
     namespace: 'main',
     state:{
-        activePageId:1
+        activePageId:1,
+        contentPageAnimation:animationLess['perspectiveUpReturn']
     },
     effects: {
         *handleMainTabChange(_, sagaEffects) {
@@ -19,6 +21,14 @@ export default {
             const newState = {
                 ...state,
                 activePageId:activePageId,
+            }
+            return newState
+        },
+        //contentPage动画改变处理
+        contentPageAnimationChange(state, {animationName:animationName}){
+            const newState = {
+                ...state,
+                contentPageAnimation:animationLess[animationName],
             }
             return newState
         },

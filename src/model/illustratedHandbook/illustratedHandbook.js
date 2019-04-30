@@ -1,5 +1,11 @@
 import request from '@/util/request';
 
+const delay = (millisecond) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, millisecond);
+  });
+};
+
 export default {
   namespace: 'illustratedHandbook',
   state:{
@@ -21,6 +27,21 @@ export default {
       const _newlist = yield call(request, endPointURI, method , data);
       yield put({ type: 'updateList', payload: _newlist });
       yield put({ type: 'closeLoading'});
+    },
+    *handleListClick(_, sagaEffects){
+      const { call, put } = sagaEffects;
+      yield put({ type: 'saveScrollY'});
+      yield put({ type: 'main/contentPageAnimationChange', animationName: _.animationLeave});
+      yield call(delay, 500);
+      yield put({ type: 'main/contentPageAnimationChange', animationName: _.animationIn});
+      yield put({ type: 'toDetail', item: _.item });
+    },
+    *handleDetailClick(_, sagaEffects){
+      const { call, put } = sagaEffects;
+      yield put({ type: 'main/contentPageAnimationChange', animationName: _.animationLeave});
+      yield call(delay, 500);
+      yield put({ type: 'main/contentPageAnimationChange', animationName: _.animationIn});
+      yield put({ type: 'toList',});
     }
   },
   reducers: {
@@ -66,8 +87,8 @@ export default {
       }
       return newState
     },
-    //处理list的点击
-    handleListClick(state, { item:item }){
+    //跳转到detail
+    toDetail(state, { item:item }){
       const newState = {
         ...state,
         currentItem:item,
@@ -75,8 +96,8 @@ export default {
       }
       return newState
     },
-    //处理detail返回点击
-    handleDetailClick(state){
+    //跳转到detaillist
+    toList(state){
       const newState = {
         ...state,
         activePage:"list",

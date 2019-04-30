@@ -45,7 +45,6 @@ export class MainTab extends React.Component {
         </div>
       );
     }
-    
   }
   render(){
     const TabBtn = (
