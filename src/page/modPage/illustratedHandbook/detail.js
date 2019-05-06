@@ -322,12 +322,12 @@ export class Detail extends Component{
 			{
 				key:5,
 				label:"特攻",
-				text:state.currentItem.sAttack
+				text:state.currentItem.sattack
 			},
 			{
 				key:6,
 				label:"特防",
-				text:state.currentItem.sDefense
+				text:state.currentItem.sdefense
 			},
 			{
 				key:7,

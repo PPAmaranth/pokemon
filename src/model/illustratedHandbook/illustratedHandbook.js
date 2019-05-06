@@ -1,10 +1,5 @@
 import request from '@/util/request';
-
-const delay = (millisecond) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, millisecond);
-  });
-};
+import { delay } from '@/public_js/public_function.js'
 
 export default {
   namespace: 'illustratedHandbook',
@@ -22,7 +17,7 @@ export default {
     *queryAll(_, sagaEffects) {
       const { call, put } = sagaEffects;
       yield put({ type: 'showLoading'});
-      const endPointURI = 'http://localhost:8010/pokemon/queryAll';
+      const endPointURI = 'http://localhost:8010/pokemon/pokemonList';
       const method = 'POST';
       const data = {pageNum:_.payload.pageNum,pageSize:_.payload.pageSize}
       const _newlist = yield call(request, endPointURI, method , data);

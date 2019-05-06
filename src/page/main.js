@@ -6,7 +6,7 @@ import mainLess from '@/style/main.less'
 import animationLess from '@/style/animation.less';
 import { connect } from 'dva';
 import { IllustratedHandbookIndex } from '@/page/modPage/illustratedHandbook/index.js'
-import { Discovery } from '@/page/modPage/discovery.js'
+import { Discovery } from '@/page/modPage/discovery/discovery.js'
 const {
   Header, Footer, Sider, Content,
 } = Layout;
@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
           type: `${namespace}/handleMainTabChange`,
           activePageId: activePageId,
+          nowActivePageId:nowActivePageId
       })
       //从1跳出去时 分发illustratedHandbook/saveScrollY 记录scroll
       if(nowActivePageId == 1){

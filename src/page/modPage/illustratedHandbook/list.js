@@ -94,8 +94,8 @@ export class List extends Component{
 					</div>
 					<div>
 						<div style={{backgroundColor:speciesStrengthBg.Speed}}><div><div>速度</div><div>{item.speed}</div></div></div>
-						<div style={{backgroundColor:speciesStrengthBg.SpecialAttack}}><div><div>特攻</div><div>{item.sAttack}</div></div></div>
-						<div style={{backgroundColor:speciesStrengthBg.SpecialDefense}}><div><div>特防</div><div>{item.sDefense}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.SpecialAttack}}><div><div>特攻</div><div>{item.sattack}</div></div></div>
+						<div style={{backgroundColor:speciesStrengthBg.SpecialDefense}}><div><div>特防</div><div>{item.sdefense}</div></div></div>
 					</div>
 					<div><div style={{backgroundColor:speciesStrengthBg.Total}}><div>总和</div><div>{item.ethnicValue}</div></div></div>
 				</div>
