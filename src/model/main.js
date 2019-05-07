@@ -11,18 +11,16 @@ export default {
     effects: {
         *handleMainTabChange(_, sagaEffects) {
             const { call, put } = sagaEffects;
-            console.log(_.activePageId)
-            console.log(_.nowActivePageId)
             if(_.nowActivePageId<_.activePageId){
                 //从左往右
-                yield put({ type: 'main/contentPageAnimationChange', animationName: "slideLeft"});
+                yield put({ type: 'contentPageAnimationChange', animationName: "slideLeft"});
                 yield call(delay, 500);
-                yield put({ type: 'main/contentPageAnimationChange', animationName: "slideRightReturn"});
+                yield put({ type: 'contentPageAnimationChange', animationName: "slideRightReturn"});
             }else{
                 //从右往左
-                yield put({ type: 'main/contentPageAnimationChange', animationName: "slideRight"});
+                yield put({ type: 'contentPageAnimationChange', animationName: "slideRight"});
                 yield call(delay, 500);
-                yield put({ type: 'main/contentPageAnimationChange', animationName: "slideLeftReturn"});
+                yield put({ type: 'contentPageAnimationChange', animationName: "slideLeftReturn"});
             }
             yield put({ type: 'activeChange', activePageId: _.activePageId });
         }

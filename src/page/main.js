@@ -6,7 +6,7 @@ import mainLess from '@/style/main.less'
 import animationLess from '@/style/animation.less';
 import { connect } from 'dva';
 import { IllustratedHandbookIndex } from '@/page/modPage/illustratedHandbook/index.js'
-import { Discovery } from '@/page/modPage/discovery/discovery.js'
+import { DiscoveryIndex } from '@/page/modPage/discovery/index.js'
 const {
   Header, Footer, Sider, Content,
 } = Layout;
@@ -22,6 +22,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleMainTabChange: (nowActivePageId,activePageId) => {
+      if(nowActivePageId == activePageId){
+        //当前页面点击
+        return
+      }
       dispatch({
           type: `${namespace}/handleMainTabChange`,
           activePageId: activePageId,
@@ -53,7 +57,7 @@ export default class MainPage extends Component{
         return (<IllustratedHandbookIndex main={props} ></IllustratedHandbookIndex>)
       },
       "2":function(props){
-        return (<Discovery main={props} ></Discovery>)
+        return (<DiscoveryIndex main={props} ></DiscoveryIndex>)
       }
     }
     return (

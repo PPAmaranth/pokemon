@@ -111,6 +111,13 @@ export default {
       return newState
     },
     saveScrollY(state){
+      //分发跳转时只记录list的scrolly
+      if(state.activePage != "list"){
+        const newState = {
+          ...state
+        }
+        return newState
+      }
       const newState = {
         ...state,
         scrollY:window.scrollY
