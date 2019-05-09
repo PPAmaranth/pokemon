@@ -94,7 +94,7 @@ export default {
       }
       return newState
     },
-    //跳转到detaillist
+    //跳转到list
     toList(state){
       const newState = {
         ...state,

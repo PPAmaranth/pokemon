@@ -1,3 +1,4 @@
+@import "~@/style/index.less";
 .navWrapper{
     display: flex;
     width:100%;
@@ -20,4 +21,26 @@
             }
         }
     }
+}
+
+.topTab{
+	position:fixed;
+	top:0px;
+	width:@w100;
+	height:@topTabh;
+	background-color: #E6E6FA;
+	border-bottom:1px solid #CFCFCF;
+	box-shadow: 1px 1px 1px #CFCFCF;
+	box-sizing: border-box;
+	display: flex;
+	justify-content:center;
+	align-items: center;
+	z-index: 999;
+	>div{
+		color: #000;
+	}
+	.returnBtn{
+		position: absolute;
+		left: 4px;
+	}
 }

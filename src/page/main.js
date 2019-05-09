@@ -3,7 +3,6 @@ import "antd/dist/antd.css";
 import { Layout } from 'antd';
 import { MainTab } from '@/component/mainTab.js'
 import mainLess from '@/style/main.less'
-import animationLess from '@/style/animation.less';
 import { connect } from 'dva';
 import { IllustratedHandbookIndex } from '@/page/modPage/illustratedHandbook/index.js'
 import { DiscoveryIndex } from '@/page/modPage/discovery/index.js'
