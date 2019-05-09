@@ -136,7 +136,7 @@ export class DiscoveryIndex extends React.Component{
     }
     if(this.props.discovery.activePage == "propertiesTable"){
       page = (
-        <div>
+        <div className={pageLess.indexWrapper}>
           <ChildPageTop
             item={data[1]}
             DetailClick={()=>this.props.handleDetailClick()}

@@ -30,11 +30,12 @@ const mapDispatchToProps = (dispatch) => {
           activePageId: activePageId,
           nowActivePageId:nowActivePageId
       })
-      //从1跳出去时 分发illustratedHandbook/saveScrollY 记录scroll
+      //从1跳出去时 分发illustratedHandbook/saveScrollY 记录scroll 并重置滚动高度
       if(nowActivePageId == 1){
         dispatch({
           type: 'illustratedHandbook/saveScrollY',
         });
+        document.documentElement.scrollTop = 0
       }
     },
   };
