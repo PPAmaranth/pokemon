@@ -3,6 +3,7 @@ import { Icon } from 'antd';
 import { connect } from 'dva';
 import pageLess from './index.less';
 import { PropertiesTable } from '@/page/modPage/propertiesTable/propertiesTable.js'
+import { NaturesTable } from '@/page/modPage/naturesTable/naturesTable.js'
 
 const namespace = 'discovery';
 
@@ -95,6 +96,7 @@ export class DiscoveryIndex extends React.Component{
         title: '性格大全',
         key:'3',
         icon:'solution',
+        page:'naturesTable',
         color:'#e84c3d'
       },
       {
@@ -142,6 +144,17 @@ export class DiscoveryIndex extends React.Component{
             DetailClick={()=>this.props.handleDetailClick()}
           ></ChildPageTop>
           <PropertiesTable></PropertiesTable>
+        </div>
+      )
+    }
+    if(this.props.discovery.activePage == "naturesTable"){
+      page = (
+        <div className={pageLess.indexWrapper}>
+          <ChildPageTop
+            item={data[1]}
+            DetailClick={()=>this.props.handleDetailClick()}
+          ></ChildPageTop>
+          <NaturesTable></NaturesTable>
         </div>
       )
     }
