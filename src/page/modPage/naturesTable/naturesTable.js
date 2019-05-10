@@ -6,11 +6,13 @@ export class NaturesTable extends Component {
     constructor(props) {
     	super(props);
     }
+    //表头
     renderTheadTd(item){
         return(
             <td key={item.key} style={{backgroundColor:item.color}}>{item.CNname}</td>
         )
     }
+    //带颜色的td
     renderColorTd(str){
         const choice = {
             "—":"fff",
@@ -31,6 +33,7 @@ export class NaturesTable extends Component {
             return (<td>{str}</td>)
         }
     }
+    //列表
     renderTbody(item){
         return(
             <tr key={item.key}>
@@ -43,6 +46,7 @@ export class NaturesTable extends Component {
         )
     }
     renderTable(){
+        //标题
         const thead = [
             {
                 key:1,
@@ -70,6 +74,7 @@ export class NaturesTable extends Component {
                 {thead.map((item)=>this.renderTheadTd(item))}
             </tr>
         ) 
+        //加key
         let natures = []
         for(let i in pm_natures){
             const obj = {
